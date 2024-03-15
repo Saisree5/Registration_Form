@@ -1,0 +1,15 @@
+.error {
+    color:indigo;
+  }
+  label{
+      color:crimson;
+      font-weight: bolder;
+  }
+  h2{
+      text-align: center;
+      color:deeppink
+  }
+  body{
+      background-color:chartreuse;
+      
+  }

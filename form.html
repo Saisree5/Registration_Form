@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <!--To include the bootstrap in our code-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- linking style from external css-->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2><i>Registration Form</i></h2>
+    <form id="registrationForm" style="border:10px solid indigo;padding:30px">
+      <!--TextBox for Name-->
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+        <span id="NameError" class="error"></span>
+      </div>
+      <!--TextBox for Email-->
+      <div class="form-group">
+        <label for="email">Email ID:</label>
+        <input type="email" class="form-control" id="email" required>
+        <span id="emailError" class="error"></span>
+      </div>
+      <!--TextBox for PhoneNumber-->
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" class="form-control" id="phone" required>
+        <span id="phoneError" class="error"></span>
+      </div>
+      <!--TextBox for Password-->
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" required>
+        <span id="passwordError" class="error"></span>
+      </div>
+      <!--TextBox for Confirm Password-->
+      <div class="form-group">
+        <label for="confirm">Confirm Password:</label>
+        <input type="password" class="form-control" id="confirm" required>
+        <span id="confirmError" class="error"></span>
+      </div>
+      <!--Button to submit-->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <script>
+     
+//Peforming validation whenever submit event occurs on the form
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    validateForm();
+  });
+
+  //Validationg form entries
+  function validateForm() {
+
+    //Extracting the form entires
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var password = document.getElementById('password').value;
+    var confirm = document.getElementById('confirm').value;
+    var flag=0;
+
+    //Initially errors are empty
+    document.getElementById('NameError').innerHTML = '';
+    document.getElementById('emailError').innerHTML = '';
+    document.getElementById('phoneError').innerHTML = '';
+    document.getElementById('passwordError').innerHTML = '';
+    document.getElementById('confirmError').innerHTML = '';
+
+    //Verifying whether the name is atleast 5 characters long
+    if (name.length < 5) {
+      document.getElementById('NameError').innerHTML = 'Name must be at least 5 characters long';
+      flag=1
+    }
+
+    //Verifying whether it is a proper email format or not
+    if (email.length <7) {
+      document.getElementById('emailError').innerHTML = 'Enter a valid email address';
+      flag=1
+    }
+
+    //Verifying whether it is a proper PhoneNo format or not
+    if (phone.length !== 10 || phone === '123456789') {
+      document.getElementById('phoneError').innerHTML = 'Enter a valid 10-digit phone number';
+      flag=1
+    }
+
+    //Checking constraints on password
+    if (password.length < 8 || password === 'password' || password === name) {
+      document.getElementById('passwordError').innerHTML = 'Password must be at least 8 characters long and not be "password" or your name';
+      flag=1
+    }
+
+    //Confirming password
+    if (password !== confirm) {
+      document.getElementById('confirmError').innerHTML = 'Password does not match';
+      flag=1
+    }
+
+    //If no errors submiting the form
+    else{
+      if(flag!=1){
+        alert("Submitted Successfully")
+          document.getElementById('name').value='';
+          document.getElementById('email').value='';
+          document.getElementById('phone').value='';
+          document.getElementById('password').value='';
+          document.getElementById('confirm').value='';
+    
+
+         
+          flag=0
+      }
+    }
+  }
+  </script>
+</body>
+</html>
